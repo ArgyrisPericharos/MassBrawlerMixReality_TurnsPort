@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject Attacker, Deffender;
 
-    public List<GameObject> AllFighters;
+    [SerializeField] private List<AllFightersData> AllFighters = new List<AllFightersData>();
 
     public bool Sorted;
 
@@ -30,15 +30,21 @@ public class GameManager : MonoBehaviour
 
         Sorted = false;
 
-        for (int i = 0; i < 1; i++)
-        {
-            AllFighters.Add(Fighter1);
-            AllFighters.Add(Fighter2);
-            AllFighters.Add(Fighter3);
-            AllFighters.Add(Fighter4);
-            AllFighters.Add(Fighter5);
-        }
+        /* for (int i = 0; i < 1; i++)
+         {
+             AllFighters.Add(Fighter1);
+             AllFighters.Add(Fighter2);
+             AllFighters.Add(Fighter3);
+             AllFighters.Add(Fighter4);
+             AllFighters.Add(Fighter5);
+         }
 
+         AllFighters.Add(new AllFightersData(Fighter1.GetComponent<FightersInfo>().MovementStat));
+         AllFighters.Add(new AllFightersData(Fighter2.GetComponent<FightersInfo>().MovementStat));
+         AllFighters.Add(new AllFightersData(Fighter3.GetComponent<FightersInfo>().MovementStat));
+         AllFighters.Add(new AllFightersData(Fighter4.GetComponent<FightersInfo>().MovementStat));
+         AllFighters.Add(new AllFightersData(Fighter5.GetComponent<FightersInfo>().MovementStat));
+        */
 
     }
 
@@ -50,16 +56,21 @@ public class GameManager : MonoBehaviour
             //have buttons and screens for setup
         }
         if (SetUpPhaze == false && MovementPhaze == true && FightPhaze == false)
-        {
-
-   
+        {          
             //AllFighters.OrderBy(go => go.gameObject.GetComponent<FightersInfo>().MovementStat).ToArray();
-
             if (Sorted == false)
             {
+                AllFighters.Add(new AllFightersData(Fighter1.GetComponent<FightersInfo>().MovementStat, Fighter1.name));
+                AllFighters.Add(new AllFightersData(Fighter2.GetComponent<FightersInfo>().MovementStat, Fighter2.name));
+                AllFighters.Add(new AllFightersData(Fighter3.GetComponent<FightersInfo>().MovementStat, Fighter3.name));
+                AllFighters.Add(new AllFightersData(Fighter4.GetComponent<FightersInfo>().MovementStat, Fighter4.name));
+                AllFighters.Add(new AllFightersData(Fighter5.GetComponent<FightersInfo>().MovementStat, Fighter5.name));
                 SortInOrder();
                 Sorted = true;
             }
+
+
+
 
 
             //have to make the grid were the players move and an order of player turns system
@@ -84,12 +95,28 @@ public class GameManager : MonoBehaviour
         FightPhaze = true;
     }
 
-    void SortInOrder()
+    private void SortInOrder()
     {
-        for (int i = 0; i < AllFighters.Count; i++)
+        /*for (int i = 0; i < AllFighters.Count; i++)
         {
-            
-        }
+
+        } */
+
+        AllFighters.Sort(SortByMovement);
     }
+
+    private int SortByMovement(AllFightersData a, AllFightersData b)
+    {
+        if (a.MovementStatInfo > b.MovementStatInfo)
+        {
+            return -1;
+        }
+        else if (a.MovementStatInfo < b.MovementStatInfo)
+        {
+            return 1;
+        }
+        return 0;
+    }
+
 
 }

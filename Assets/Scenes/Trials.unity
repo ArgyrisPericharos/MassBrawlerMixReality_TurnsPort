@@ -651,6 +651,8 @@ MonoBehaviour:
   RandomBehaviour: 0
   IsMyturn: 0
   availableMoves: []
+  currentSquare: {fileID: 0}
+  newSquare: {fileID: 0}
   SelectedMe: 0
 --- !u!1 &172256544
 GameObject:
@@ -1440,6 +1442,8 @@ MonoBehaviour:
   RandomBehaviour: 0
   IsMyturn: 0
   availableMoves: []
+  currentSquare: {fileID: 0}
+  newSquare: {fileID: 0}
   SelectedMe: 0
 --- !u!1 &816085153
 GameObject:
@@ -1717,6 +1721,8 @@ MonoBehaviour:
   RandomBehaviour: 0
   IsMyturn: 0
   availableMoves: []
+  currentSquare: {fileID: 0}
+  newSquare: {fileID: 0}
   SelectedMe: 0
 --- !u!1 &960892827
 GameObject:
@@ -1755,7 +1761,10 @@ MonoBehaviour:
   SetUpPhaze: 0
   MovementPhaze: 0
   FightPhaze: 0
+  Attacker: {fileID: 0}
+  Deffender: {fileID: 0}
   AllFighters: []
+  Sorted: 0
 --- !u!4 &960892829
 Transform:
   m_ObjectHideFlags: 0
@@ -2691,6 +2700,8 @@ MonoBehaviour:
   RandomBehaviour: 0
   IsMyturn: 0
   availableMoves: []
+  currentSquare: {fileID: 0}
+  newSquare: {fileID: 0}
   SelectedMe: 0
 --- !u!1 &1833780227
 GameObject:
@@ -2800,6 +2811,8 @@ MonoBehaviour:
   RandomBehaviour: 0
   IsMyturn: 0
   availableMoves: []
+  currentSquare: {fileID: 0}
+  newSquare: {fileID: 0}
   SelectedMe: 0
 --- !u!1 &1958387110
 GameObject:
