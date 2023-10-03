@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FightersInfo : MonoBehaviour
 {
@@ -29,7 +30,13 @@ public class FightersInfo : MonoBehaviour
     public bool NPControl, OffensiveBehaviour, DefenciveBehaviour, RandomBehaviour;
     public bool IsMyturn;
 
+    //NPControl buttons for steup screen
+    public Button ButtonForOffensiveBehaviour, ButtonForDefensiveBehaviour, ButtonForRandomBehaviour;
 
+    //Non NPConttrol buttons for setup screen
+    public Button NPControlPossitveButton, NPControlNegativeButton, ChangeOffenceStatPositiveButton, ChangeOffenceStatNegativeButton, ChangeDeffenceStatPositiveButton, ChangeDeffenceStatNegativeButton, ChangeMovementStatPositiveButton, ChangeMovementStatNegativeButton;
+
+    public bool ReadyForStart;
 
     //for movement
     public GameObject[] availableMoves;
@@ -38,6 +45,12 @@ public class FightersInfo : MonoBehaviour
     public bool SelectedMe;
     void Start()
     {
+        NPControl = false;
+        OffensiveBehaviour = false;
+        DefenciveBehaviour = false;
+        RandomBehaviour = false;
+        IsMyturn = false;
+        ReadyForStart = false;
 
         OffenceStat = 0;
         DefenceStat = 0;
@@ -53,12 +66,53 @@ public class FightersInfo : MonoBehaviour
             // move to setup screens and enable all fighter ui data
             if (NPControl == true)
             {
+                NPControlPossitveButton.gameObject.SetActive(false);
+                ChangeOffenceStatPositiveButton.gameObject.SetActive(false);
+                ChangeOffenceStatNegativeButton.gameObject.SetActive(false);
+                ChangeDeffenceStatPositiveButton.gameObject.SetActive(false);
+                ChangeDeffenceStatNegativeButton.gameObject.SetActive(false);
+                ChangeMovementStatPositiveButton.gameObject.SetActive(false);
+                ChangeMovementStatNegativeButton.gameObject.SetActive(false);
+
+                ButtonForDefensiveBehaviour.gameObject.SetActive(true);
+                ButtonForDefensiveBehaviour.gameObject.SetActive(true);
+                ButtonForRandomBehaviour.gameObject.SetActive(true);
+                NPControlNegativeButton.gameObject.SetActive(true);
+
+                if (DefenciveBehaviour == true && OffensiveBehaviour == false && RandomBehaviour == false)
+                {
+                    AvailabePoints = 0;
+                    OffenceStat = 10;
+                    DefenceStat = 5;
+                }
+                if (DefenciveBehaviour == false && OffensiveBehaviour == true && RandomBehaviour == false)
+                {
+                    AvailabePoints = 0;
+                    OffenceStat = 5;
+                    DefenceStat = 10;
+                }
+                else if (DefenciveBehaviour == false && OffensiveBehaviour == false && RandomBehaviour == true)
+                {
+                    AvailabePoints = 0;
+                }
                 //here turn off all visual ui access to this fighter's data.
                 //also enable ai behaviour choice.
-
+                
             }
             else if (NPControl == false)
             {
+                NPControlPossitveButton.gameObject.SetActive(true);
+                ChangeOffenceStatPositiveButton.gameObject.SetActive(true);
+                ChangeOffenceStatNegativeButton.gameObject.SetActive(true);
+                ChangeDeffenceStatPositiveButton.gameObject.SetActive(true);
+                ChangeDeffenceStatNegativeButton.gameObject.SetActive(true);
+                ChangeMovementStatPositiveButton.gameObject.SetActive(true);
+                ChangeMovementStatNegativeButton.gameObject.SetActive(true);
+
+                ButtonForDefensiveBehaviour.gameObject.SetActive(false);
+                ButtonForDefensiveBehaviour.gameObject.SetActive(false);
+                ButtonForRandomBehaviour.gameObject.SetActive(false);
+                NPControlNegativeButton.gameObject.SetActive(false);
                 //here have all the data visible to the player so he can be able to choose what is the stats of their character.
             }
         }
@@ -184,5 +238,46 @@ public class FightersInfo : MonoBehaviour
         }
 
     }
+
+    void TurnNPControlOn()
+    {
+        NPControl = true;
+    }
+
+    void TurnNPControlOff()
+    {
+        NPControl = false;
+    }
+
+    void TurnOnDefenceControl()
+    {
+        DefenciveBehaviour = true;
+        OffensiveBehaviour = false;
+        RandomBehaviour = false;
+        ButtonForDefensiveBehaviour.image.color = Color.white;
+        ButtonForOffensiveBehaviour.image.color = Color.red;
+        ButtonForRandomBehaviour.image.color = Color.red;
+    }
+
+    void TurnOnOffenseControl()
+    {
+        DefenciveBehaviour = false;
+        OffensiveBehaviour = true;
+        RandomBehaviour = false;
+        ButtonForDefensiveBehaviour.image.color = Color.red;
+        ButtonForOffensiveBehaviour.image.color = Color.white;
+        ButtonForRandomBehaviour.image.color = Color.red;
+    }
+
+    void TurnOnRandomControl()
+    {
+        DefenciveBehaviour = false;
+        OffensiveBehaviour = false;
+        RandomBehaviour = true;
+        ButtonForDefensiveBehaviour.image.color = Color.red;
+        ButtonForOffensiveBehaviour.image.color = Color.red;
+        ButtonForRandomBehaviour.image.color = Color.white;
+    }
+
 
 }

@@ -4,22 +4,25 @@ using System.Collections.Specialized;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static Unity.VisualScripting.FlowStateWidget;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject Fighter1, Fighter2, Fighter3, Fighter4, Fighter5; // 1*used to take all info of the fighters.
-
+    public GameObject GridSystem;
     public bool SetUpPhaze, MovementPhaze, FightPhaze; //used to determine the stage/phaze of the game which are: setting up menu screen, moving screen, dealing with encounter screen,
 
-    //for fight phaze
 
-    public GameObject Attacker, Deffender;
+    //ForSetupPhaze
+    public Button ButtonToMoveFromSetToMove;
 
+    //For sorting the order of who plays in turns.
     [SerializeField] private List<AllFightersData> AllFighters = new List<AllFightersData>();
-
     public bool Sorted;
 
+    //for fight phaze
+    public GameObject Attacker, Deffender;
 
     void Start()
     {
@@ -28,6 +31,8 @@ public class GameManager : MonoBehaviour
         MovementPhaze = false;
         FightPhaze = false;
 
+        ButtonToMoveFromSetToMove.gameObject.SetActive(false);
+        GridSystem.SetActive(false);
         Sorted = false;
 
         /* for (int i = 0; i < 1; i++)
@@ -53,10 +58,17 @@ public class GameManager : MonoBehaviour
     {
         if (SetUpPhaze == true && MovementPhaze == false && FightPhaze == false)
         {
+            if (Fighter1.GetComponent<FightersInfo>().AvailabePoints == 0 && Fighter2.GetComponent<FightersInfo>().AvailabePoints == 0 && Fighter3.GetComponent<FightersInfo>().AvailabePoints == 0 && Fighter4.GetComponent<FightersInfo>().AvailabePoints == 0 && Fighter5.GetComponent<FightersInfo>().AvailabePoints == 0)
+            {
+                ButtonToMoveFromSetToMove.gameObject.SetActive(true);
+            }
             //have buttons and screens for setup
         }
         if (SetUpPhaze == false && MovementPhaze == true && FightPhaze == false)
-        {          
+        {
+            ButtonToMoveFromSetToMove.gameObject.SetActive(false);
+            GridSystem.SetActive(true);
+
             //AllFighters.OrderBy(go => go.gameObject.GetComponent<FightersInfo>().MovementStat).ToArray();
             if (Sorted == false)
             {
