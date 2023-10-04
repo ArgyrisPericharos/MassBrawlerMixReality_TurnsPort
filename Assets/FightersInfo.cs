@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class FightersInfo : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class FightersInfo : MonoBehaviour
 
     //Non NPConttrol buttons for setup screen
     public Button NPControlPossitveButton, NPControlNegativeButton, ChangeOffenceStatPositiveButton, ChangeOffenceStatNegativeButton, ChangeDeffenceStatPositiveButton, ChangeDeffenceStatNegativeButton, ChangeMovementStatPositiveButton, ChangeMovementStatNegativeButton;
+    public TextMeshProUGUI AvailablePointsTextNum, DefensivePointsTextNum, OffensivePointsTextNum, MovementPointsTextNum;
 
     public bool ReadyForStart;
 
@@ -55,6 +57,7 @@ public class FightersInfo : MonoBehaviour
         OffenceStat = 0;
         DefenceStat = 0;
         MovementStat = 4;
+        AvailabePoints = 15;
     }
 
 
@@ -66,18 +69,22 @@ public class FightersInfo : MonoBehaviour
             // move to setup screens and enable all fighter ui data
             if (NPControl == true)
             {
-                NPControlPossitveButton.gameObject.SetActive(false);
+                //NPControlPossitveButton.gameObject.SetActive(false);
                 ChangeOffenceStatPositiveButton.gameObject.SetActive(false);
                 ChangeOffenceStatNegativeButton.gameObject.SetActive(false);
                 ChangeDeffenceStatPositiveButton.gameObject.SetActive(false);
                 ChangeDeffenceStatNegativeButton.gameObject.SetActive(false);
                 ChangeMovementStatPositiveButton.gameObject.SetActive(false);
                 ChangeMovementStatNegativeButton.gameObject.SetActive(false);
+                AvailablePointsTextNum.gameObject.SetActive(false);
+                DefensivePointsTextNum.gameObject.SetActive(false);
+                OffensivePointsTextNum.gameObject.SetActive(false);
+                MovementPointsTextNum.gameObject.SetActive(false);
 
-                ButtonForDefensiveBehaviour.gameObject.SetActive(true);
-                ButtonForDefensiveBehaviour.gameObject.SetActive(true);
-                ButtonForRandomBehaviour.gameObject.SetActive(true);
-                NPControlNegativeButton.gameObject.SetActive(true);
+                //ButtonForDefensiveBehaviour.gameObject.SetActive(true);
+               // ButtonForDefensiveBehaviour.gameObject.SetActive(true);
+               // ButtonForRandomBehaviour.gameObject.SetActive(true);
+               // NPControlNegativeButton.gameObject.SetActive(true);
 
                 if (DefenciveBehaviour == true && OffensiveBehaviour == false && RandomBehaviour == false)
                 {
@@ -101,24 +108,47 @@ public class FightersInfo : MonoBehaviour
             }
             else if (NPControl == false)
             {
-                NPControlPossitveButton.gameObject.SetActive(true);
+                //NPControlPossitveButton.gameObject.SetActive(true);
                 ChangeOffenceStatPositiveButton.gameObject.SetActive(true);
                 ChangeOffenceStatNegativeButton.gameObject.SetActive(true);
                 ChangeDeffenceStatPositiveButton.gameObject.SetActive(true);
                 ChangeDeffenceStatNegativeButton.gameObject.SetActive(true);
                 ChangeMovementStatPositiveButton.gameObject.SetActive(true);
                 ChangeMovementStatNegativeButton.gameObject.SetActive(true);
+                AvailablePointsTextNum.gameObject.SetActive(true);
+                DefensivePointsTextNum.gameObject.SetActive(true);
+                OffensivePointsTextNum.gameObject.SetActive(true);
+                MovementPointsTextNum.gameObject.SetActive(true);
 
-                ButtonForDefensiveBehaviour.gameObject.SetActive(false);
-                ButtonForDefensiveBehaviour.gameObject.SetActive(false);
-                ButtonForRandomBehaviour.gameObject.SetActive(false);
-                NPControlNegativeButton.gameObject.SetActive(false);
+                //ButtonForDefensiveBehaviour.gameObject.SetActive(false);
+               // ButtonForDefensiveBehaviour.gameObject.SetActive(false);
+               // ButtonForRandomBehaviour.gameObject.SetActive(false);
+                //NPControlNegativeButton.gameObject.SetActive(false);
+
+
+                AvailablePointsTextNum.text = AvailabePoints.ToString();
+                DefensivePointsTextNum.text = DefenceStat.ToString();
+                OffensivePointsTextNum.text = OffenceStat.ToString();
+                MovementPointsTextNum.text = MovementStat.ToString();
                 //here have all the data visible to the player so he can be able to choose what is the stats of their character.
             }
         }
         if (gameManager.GetComponent<GameManager>().MovementPhaze == true && gameManager.GetComponent<GameManager>().SetUpPhaze == false && gameManager.GetComponent<GameManager>().FightPhaze == false) 
         {
+
             //we have moved to move phaze
+
+            ChangeOffenceStatPositiveButton.gameObject.SetActive(false);
+            ChangeOffenceStatNegativeButton.gameObject.SetActive(false);
+            ChangeDeffenceStatPositiveButton.gameObject.SetActive(false);
+            ChangeDeffenceStatNegativeButton.gameObject.SetActive(false);
+            ChangeMovementStatPositiveButton.gameObject.SetActive(false);
+            ChangeMovementStatNegativeButton.gameObject.SetActive(false);
+            AvailablePointsTextNum.gameObject.SetActive(false);
+            DefensivePointsTextNum.gameObject.SetActive(false);
+            OffensivePointsTextNum.gameObject.SetActive(false);
+            MovementPointsTextNum.gameObject.SetActive(false);
+
             if (NPControl == true)
             {
                 if (IsMyturn == true)
@@ -155,7 +185,7 @@ public class FightersInfo : MonoBehaviour
 
     // all bellow are buttons calls, they have to be assigned to buttons in a setup screen.
 
-    void ChangeOffenceStatPositive()
+    public void ChangeOffenceStatPositive()
     {
         if (AvailabePoints > 0)
         {
@@ -169,7 +199,7 @@ public class FightersInfo : MonoBehaviour
  
     }
   
-    void ChangeOffenceStatNegative()
+    public void ChangeOffenceStatNegative()
     {
         if (OffenceStat > 0)
         {
@@ -183,7 +213,7 @@ public class FightersInfo : MonoBehaviour
 
     }
 
-    void ChangeDeffenceStatPositive()
+    public void ChangeDeffenceStatPositive()
     {
         if (AvailabePoints > 0)
         {
@@ -197,7 +227,7 @@ public class FightersInfo : MonoBehaviour
    
     }
 
-    void ChangeDeffenceStatNegative()
+    public void ChangeDeffenceStatNegative()
     {
         if (DefenceStat > 0)
         {
@@ -211,7 +241,7 @@ public class FightersInfo : MonoBehaviour
 
     }
 
-    void ChangeMovementStatPositive()
+    public void ChangeMovementStatPositive()
     {
         if (AvailabePoints > 0)
         {
@@ -225,7 +255,7 @@ public class FightersInfo : MonoBehaviour
  
     }
 
-    void ChangeMovementStatNegative()
+    public void ChangeMovementStatNegative()
     {
         if (MovementStat > 4)
         {
@@ -239,17 +269,17 @@ public class FightersInfo : MonoBehaviour
 
     }
 
-    void TurnNPControlOn()
+    public void TurnNPControlOn()
     {
         NPControl = true;
     }
 
-    void TurnNPControlOff()
+    public void TurnNPControlOff()
     {
         NPControl = false;
     }
 
-    void TurnOnDefenceControl()
+    public void TurnOnDefenceControl()
     {
         DefenciveBehaviour = true;
         OffensiveBehaviour = false;
@@ -259,7 +289,7 @@ public class FightersInfo : MonoBehaviour
         ButtonForRandomBehaviour.image.color = Color.red;
     }
 
-    void TurnOnOffenseControl()
+    public void TurnOnOffenseControl()
     {
         DefenciveBehaviour = false;
         OffensiveBehaviour = true;
@@ -269,7 +299,7 @@ public class FightersInfo : MonoBehaviour
         ButtonForRandomBehaviour.image.color = Color.red;
     }
 
-    void TurnOnRandomControl()
+    public void TurnOnRandomControl()
     {
         DefenciveBehaviour = false;
         OffensiveBehaviour = false;

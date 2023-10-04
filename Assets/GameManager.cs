@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         if (SetUpPhaze == false && MovementPhaze == true && FightPhaze == false)
         {
             ButtonToMoveFromSetToMove.gameObject.SetActive(false);
-            GridSystem.SetActive(true);
+            //GridSystem.SetActive(true);
 
             //AllFighters.OrderBy(go => go.gameObject.GetComponent<FightersInfo>().MovementStat).ToArray();
             if (Sorted == false)
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void ChangeFromSetupPhazeToMovementPhaze()
+    public void ChangeFromSetupPhazeToMovementPhaze()
     {
         SetUpPhaze = false;
         MovementPhaze = true;
